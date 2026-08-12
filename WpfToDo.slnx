@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/WpfToDo.Core/WpfToDo.Core.csproj" />
+    <Project Path="src/WpfToDo/WpfToDo.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/WpfToDo.Tests/WpfToDo.Tests.csproj" />
+  </Folder>
+</Solution>
