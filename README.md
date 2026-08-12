@@ -93,6 +93,23 @@ dotnet test
 
 ---
 
+## 🐳 اجرا در Docker (فقط تست‌ها)
+
+لایه منطق دامنه (`WpfToDo.Core`) و تست‌های واحد (`WpfToDo.Tests`) مستقل از WPF هستند و می‌توانند داخل کانتینر build و اجرا شوند. خودِ اپ گرافیکی WPF چون مخصوص ویندوز است در Docker build/اجرا نمی‌شود و از این image کنار گذاشته شده.
+
+```bash
+docker compose up --build
+```
+
+یا مستقیم:
+
+```bash
+docker build -t wpftodo-tests .
+docker run --rm wpftodo-tests
+```
+
+---
+
 ## 🧭 قواعد توسعه
 
 این پروژه چند قانون سخت‌گیرانه دارد:

@@ -1,0 +1,12 @@
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wpftodo-tests
+    # اجرای یک‌باره: تست‌ها را اجرا می‌کند و کانتینر خارج می‌شود (مناسب برای CI و اجرای محلی)
+    volumes:
+      - test-results:/src/tests/WpfToDo.Tests/TestResults
+
+volumes:
+  test-results:
