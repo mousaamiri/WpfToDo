@@ -15,7 +15,7 @@
 
 هدف این پروژه ساخت یک اپلیکیشن Todo دسکتاپی است که وظایف را به‌صورت محلی مدیریت می‌کند: لیست‌های چندگانه، آیتم‌ها، دسته‌بندی و تم روشن/تاریک. رابط کاربری با WPF نوشته می‌شود و **منطق دامنه در لایه مستقل `WpfToDo.Core` (بدون هیچ وابستگی به UI)** قرار می‌گیرد تا کاملاً تست‌پذیر باشد.
 
-> ⚠️ **وضعیت فعلی:** پروژه در مرحله **راه‌اندازی اولیه (scaffold)** است. ساختار solution و پروژه‌ها آماده است، اما فیچرهای کاربری هنوز پیاده‌سازی نشده‌اند. جدول زیر وضعیت دقیق را نشان می‌دهد.
+> ⚠️ **وضعیت فعلی:** بک‌اند پروژه شامل مدل‌های دامنه، EF Core/SQLite، سرویس‌های CRUD، Wrapperهای validation/change tracking و ViewModelهای اصلی است. ساخت View/XAML هنوز انجام نشده است.
 
 ---
 
@@ -24,12 +24,18 @@
 | ویژگی | وضعیت |
 |---|---|
 | ساختار solution و سه پروژه (App / Core / Tests) | ✅ آماده |
-| ایجاد و مدیریت چند لیست Todo | ⬜ برنامه‌ریزی‌شده |
-| افزودن، ویرایش و حذف آیتم | ⬜ برنامه‌ریزی‌شده |
-| تغییر وضعیت آیتم (تکمیل / در حال انجام) | ⬜ برنامه‌ریزی‌شده |
-| دسته‌بندی آیتم‌ها | ⬜ برنامه‌ریزی‌شده |
+| مدل‌های Category، TodoList و TodoItem | ✅ آماده |
+| DbContext با EF Core و SQLite | ✅ آماده |
+| سرویس‌های CRUD لیست، آیتم و دسته‌بندی | ✅ آماده |
+| ViewModelهای TodoLists و TodoItems | ✅ آماده |
+| Wrapperهای validation و change tracking | ✅ آماده |
+| تست‌های واحد بک‌اند | ✅ آماده |
+| ایجاد و مدیریت چند لیست Todo در UI | ⬜ برنامه‌ریزی‌شده |
+| افزودن، ویرایش و حذف آیتم در UI | ⬜ برنامه‌ریزی‌شده |
+| تغییر وضعیت آیتم در UI | ⬜ برنامه‌ریزی‌شده |
+| دسته‌بندی و تم روشن/تاریک در UI | ⬜ برنامه‌ریزی‌شده |
 | تم روشن و تاریک (Dark/Light) با `DynamicResource` | ⬜ برنامه‌ریزی‌شده |
-| ذخیره‌سازی محلی (Persistence) | ⬜ برنامه‌ریزی‌شده |
+| ذخیره‌سازی محلی در محیط اجرا | ✅ زیرساخت آماده |
 
 <sub>این جدول پس از تکمیل هر فیچر قابل‌مشاهده به‌روزرسانی می‌شود.</sub>
 
@@ -40,7 +46,8 @@
 - **Framework:** WPF روی `net10.0-windows`
 - **زبان:** C# با `Nullable` و `ImplicitUsings` فعال
 - **الگو:** MVVM — بدون منطق تجاری در code-behind؛ فقط binding و `DataTemplate`
-- **کتابخانه MVVM:** `CommunityToolkit.Mvvm` (`ObservableObject` / `RelayCommand`) — *پس از شروع پیاده‌سازی ViewModelها اضافه می‌شود*
+- **کتابخانه MVVM:** `CommunityToolkit.Mvvm` (`ObservableObject` / `RelayCommand`)
+- **داده:** `Microsoft.EntityFrameworkCore.Sqlite`
 - **تست:** xUnit
 - **جداسازی لایه‌ها:** تمام منطق دامنه در `WpfToDo.Core` بدون ارجاع به WPF، تا بدون UI قابل تست باشد
 
@@ -123,11 +130,9 @@ docker run --rm wpftodo-tests
 
 ## 🗺️ نقشه راه (Roadmap)
 
-1. تعریف مدل‌های دامنه (`TodoItem`, `TodoList`) در `WpfToDo.Core` همراه تست.
-2. افزودن `CommunityToolkit.Mvvm` و ساخت ViewModelها.
-3. پیاده‌سازی CRUD آیتم‌ها و لیست‌ها در UI.
-4. سیستم تم Dark/Light با `ResourceDictionary`.
-5. ذخیره‌سازی محلی (JSON یا SQLite).
+1. ساخت View و اتصال آن‌ها به ViewModelها.
+2. اضافه‌کردن سیستم تم Dark/Light با `ResourceDictionary`.
+3. تکمیل wiring برنامه در `App.xaml.cs` و اجرای migration/database startup.
 
 ---
 
